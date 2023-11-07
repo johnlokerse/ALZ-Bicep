@@ -90,7 +90,7 @@ param parLogAnalyticsWorkspaceTags object = parTags
 param parUseSentinelClassicPricingTiers bool = false
 
 @sys.description('Log Analytics LinkedService name for Automation Account.')
-param parLogAnalyticsLinkedServiceAutomationAccountName string = 'Automation'
+param parLogAnalyticsWorkspaceLinkedServiceAutomationAccountName string = 'Automation'
 
 @sys.description('Set Parameter to true to Opt-out of deployment telemetry')
 param parTelemetryOptOut bool = false
@@ -150,7 +150,7 @@ resource resLogAnalyticsWorkspaceSolutions 'Microsoft.OperationsManagement/solut
 
 resource resLogAnalyticsLinkedServiceForAutomationAccount 'Microsoft.OperationalInsights/workspaces/linkedServices@2020-08-01' = if (parLogAnalyticsWorkspaceLinkAutomationAccount) {
   parent: resLogAnalyticsWorkspace
-  name: parLogAnalyticsLinkedServiceAutomationAccountName
+  name: parLogAnalyticsWorkspaceLinkedServiceAutomationAccountName
   properties: {
     resourceId: resAutomationAccount.id
   }

@@ -1,7 +1,7 @@
 metadata name = 'ALZ Bicep - Azure vWAN Connectivity Module'
 metadata description = 'Module used to set up vWAN Connectivity'
 
-type virtualWanOptionsType = ({
+type typVirtualWanOptions = ({
   @sys.description('Switch to enable/disable VPN Gateway deployment on the respective Virtual WAN Hub.')
   parVpnGatewayEnabled: bool
 
@@ -47,7 +47,7 @@ param parLocation string = resourceGroup().location
 @sys.description('Prefix value which will be prepended to all resource names.')
 param parCompanyPrefix string = 'alz'
 
-@sys.description('Azure Firewall Tier associated with the Firewall to deploy. If not set, the default value is Standard.')
+@sys.description('Azure Firewall Tier associated with the Firewall to deploy.')
 @allowed([
   'Basic'
   'Standard'
@@ -88,10 +88,9 @@ param parVirtualWanHubName string = '${parCompanyPrefix}-vhub'
 - `parHubRoutingPreference` - The Virtual WAN Hub routing preference. The allowed values are `ASN`, `VpnGateway`, `ExpressRoute`.
 - `parVirtualRouterAutoScaleConfiguration` - The Virtual WAN Hub capacity. The value should be between 2 to 50.
 - `parVirtualHubRoutingIntentDestinations` - The Virtual WAN Hub routing intent destinations, leave empty if not wanting to enable routing intent. The allowed values are `Internet`, `PrivateTraffic`.
-- `parUseCustomNamingScheme` - Switch to enable/disable custom naming scheme. When enabled a custom name can be given for Azure Firewall, ExpressRoute Gateway, VPN Gateway and Virtual Hubs.
 
 ''')
-param parVirtualWanHubs virtualWanOptionsType = [ {
+param parVirtualWanHubs typVirtualWanOptions = [ {
     parVpnGatewayEnabled: true
     parExpressRouteGatewayEnabled: true
     parAzFirewallEnabled: true
